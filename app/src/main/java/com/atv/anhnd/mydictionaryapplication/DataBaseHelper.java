@@ -77,7 +77,6 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-
     }
 
     @Override
@@ -153,9 +152,9 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         }
     }
 
-    public ArrayList<String> getAllWordFromBookmark(String tu) {
-        String q = " SELECT * FROM bookmark ORDER BY [date] DESC;";
-        Cursor result = memDB.rawQuery(q, new String[]{tu});
+    public ArrayList<String> getAllWordFromBookmark() {
+        String q = " SELECT * FROM bookmark ORDER BY [created_at] DESC;";
+        Cursor result = memDB.rawQuery(q, null);
 
         ArrayList<String> source = new ArrayList<>();
 
@@ -172,8 +171,8 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     }
 
     public Word getWordFromBookmark(String tu) {
-        String q = " SELECT * FROM bookmark WHERE upper([tu]) = upper(?)";
-        Cursor result = memDB.rawQuery(q, null);
+        String q = " SELECT * FROM bookmark WHERE tu = ?";
+        Cursor result = memDB.rawQuery(q, new String[]{tu});
         Word word = new Word();
         while (result.moveToNext()) {
             word.tu = result.getString(result.getColumnIndex(COL_KEY));

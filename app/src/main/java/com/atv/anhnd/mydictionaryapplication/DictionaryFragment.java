@@ -44,7 +44,7 @@ public class DictionaryFragment extends Fragment {
 
         list_word = view.findViewById(R.id.list_word);
         String type = Global.getState(getActivity(), "dic_type");
-        if (type.equals("ev")) {
+        if (type != null && type.equals("ev")) {
             memSource = dataBaseHelper.getWord(TB_EN_VN);
         } else {
             memSource = dataBaseHelper.getWord(TB_VN_EN);

@@ -14,6 +14,6 @@ public class Global {
 
     public static String getState(Activity activity, String key){
         SharedPreferences sharedPref = activity.getPreferences(Context.MODE_PRIVATE);
-        return  sharedPref.getString(key, null);
+        return  sharedPref.getString(key, "");
     }
 }

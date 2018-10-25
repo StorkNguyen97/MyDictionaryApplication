@@ -64,8 +64,7 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onItemClick(String value) {
                 DetailFragment detailFragment = new DetailFragment();
-                String id = Global.getState(MainActivity.this, "dic_type");
-                String nghia = dataBaseHelper.getWord(value, id.equals("ev") ? TB_EN_VN : TB_VN_EN).nghia;
+                String nghia = dataBaseHelper.getWordFromBookmark(value).nghia;
                 Bundle bundle = new Bundle();
                 bundle.putString("tu", value);
                 bundle.putString("nghia", nghia);
@@ -123,7 +122,8 @@ public class MainActivity extends AppCompatActivity
         getMenuInflater().inflate(R.menu.main, menu);
         menuSetting = menu.findItem(R.id.action_settings);
         String id = Global.getState(this, "dic_type");
-        if (id.equals("ev")) menuSetting.setIcon(getResources().getDrawable(R.drawable.en_vn_2));
+        if (id != null && id.equals("ev"))
+            menuSetting.setIcon(getResources().getDrawable(R.drawable.en_vn_2));
         else menuSetting.setIcon(getResources().getDrawable(R.drawable.vn_en_1));
         return true;
     }
@@ -134,10 +134,12 @@ public class MainActivity extends AppCompatActivity
             Global.saveState(this, "dic_type", "ev");
             dictionaryFragment.resetDataSource("ev");
             menuSetting.setIcon(getResources().getDrawable(R.drawable.en_vn_2));
+            goToFragment(dictionaryFragment, false);
         } else if (item.getItemId() == R.id.action_vn_en) {
             Global.saveState(this, "dic_type", "ve");
             dictionaryFragment.resetDataSource("ve");
             menuSetting.setIcon(getResources().getDrawable(R.drawable.vn_en_1));
+            goToFragment(dictionaryFragment, false);
         }
         return super.onOptionsItemSelected(item);
     }

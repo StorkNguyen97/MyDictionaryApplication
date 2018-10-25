@@ -13,6 +13,7 @@ import android.widget.ListView;
 public class BookmarkFragment extends Fragment {
 
     private FragmentListener listener;
+    private DataBaseHelper dataBaseHelper;
 
     public BookmarkFragment() {
         // Required empty public constructor
@@ -44,8 +45,11 @@ public class BookmarkFragment extends Fragment {
 //            }
 //        });
 
+        dataBaseHelper = new DataBaseHelper(view.getContext());
+
         ListView bookmarkList = view.findViewById(R.id.bookmark_list);
-        final BookmarkAdapter adapter = new BookmarkAdapter(getActivity(), getListOfWords());
+
+        final BookmarkAdapter adapter = new BookmarkAdapter(getActivity(), dataBaseHelper.getAllWordFromBookmark());
         bookmarkList.setAdapter(adapter);
 
         adapter.setOnClickListener(new ListItemListener() {
