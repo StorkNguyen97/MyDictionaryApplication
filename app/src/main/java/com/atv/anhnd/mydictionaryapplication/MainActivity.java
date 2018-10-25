@@ -18,6 +18,9 @@ import android.widget.EditText;
 
 import java.util.ArrayList;
 
+import static com.atv.anhnd.mydictionaryapplication.DataBaseHelper.TB_EN_VN;
+import static com.atv.anhnd.mydictionaryapplication.DataBaseHelper.TB_VN_EN;
+
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -46,14 +49,28 @@ public class MainActivity extends AppCompatActivity
         dictionaryFragment.setOnFragmentListener(new FragmentListener() {
             @Override
             public void onItemClick(String value) {
-                goToFragment(DetailFragment.getNewInstance(value), false);
+                DetailFragment detailFragment = new DetailFragment();
+                String id = Global.getState(MainActivity.this, "dic_type");
+                String nghia = dataBaseHelper.getWord(value, id.equals("ev") ? TB_EN_VN : TB_VN_EN).nghia;
+                Bundle bundle = new Bundle();
+                bundle.putString("tu", value);
+                bundle.putString("nghia", nghia);
+                detailFragment.setArguments(bundle);
+                goToFragment(detailFragment, false);
             }
         });
 
         bookmarkFragment.setOnFragmentListener(new FragmentListener() {
             @Override
             public void onItemClick(String value) {
-                goToFragment(DetailFragment.getNewInstance(value), false);
+                DetailFragment detailFragment = new DetailFragment();
+                String id = Global.getState(MainActivity.this, "dic_type");
+                String nghia = dataBaseHelper.getWord(value, id.equals("ev") ? TB_EN_VN : TB_VN_EN).nghia;
+                Bundle bundle = new Bundle();
+                bundle.putString("tu", value);
+                bundle.putString("nghia", nghia);
+                detailFragment.setArguments(bundle);
+                goToFragment(detailFragment, false);
             }
         });
 

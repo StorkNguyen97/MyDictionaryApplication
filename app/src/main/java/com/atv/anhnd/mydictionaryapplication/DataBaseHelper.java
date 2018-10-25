@@ -97,6 +97,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         }
         return source;
     }
+
     public ArrayList<String> getWord(String tableName) {
         String q = "SELECT * FROM " + tableName;
         Cursor result = memDB.rawQuery(q, null);
@@ -111,6 +112,18 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
     public Word getWord(String tu, int dicType) {
         String tableName = getTableName(dicType);
+        String q = " SELECT * FROM " + tableName + " WHERE upper([tu]) = upper(?) ";
+        Cursor result = memDB.rawQuery(q, new String[]{tu});
+
+        Word word = new Word();
+        while (result.moveToNext()) {
+            word.tu = result.getString(result.getColumnIndex(COL_KEY));
+            word.nghia = result.getString(result.getColumnIndex(COL_VALUE));
+        }
+        return word;
+    }
+
+    public Word getWord(String tu, String tableName) {
         String q = " SELECT * FROM " + tableName + " WHERE upper([tu]) = upper(?) ";
         Cursor result = memDB.rawQuery(q, new String[]{tu});
 
@@ -152,13 +165,13 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         return source;
     }
 
-    public boolean isWordMark(Word word){
+    public boolean isWordMark(Word word) {
         String q = " SELECT * FROM bookmark WHERE upper([tu]) = upper(?) AND [nghia] = ?";
         Cursor result = memDB.rawQuery(q, new String[]{word.tu, word.nghia});
         return result.getCount() > 0;
     }
 
-    public Word getWordFromBookmark(String tu){
+    public Word getWordFromBookmark(String tu) {
         String q = " SELECT * FROM bookmark WHERE upper([tu]) = upper(?)";
         Cursor result = memDB.rawQuery(q, null);
         Word word = new Word();
@@ -173,7 +186,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         String tableName = "";
         if (dicType == R.id.action_en_vn) {
             tableName = TB_EN_VN;
-        } else  {
+        } else {
             tableName = TB_VN_EN;
         }
         return tableName;
