@@ -1,6 +1,5 @@
 package com.atv.anhnd.mydictionaryapplication;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -14,23 +13,20 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 
+import static com.atv.anhnd.mydictionaryapplication.DataBaseHelper.TB_EN_VN;
+import static com.atv.anhnd.mydictionaryapplication.DataBaseHelper.TB_VN_EN;
+
 public class DictionaryFragment extends Fragment {
 
-    private String value = "Hello Linh";
+    private String value = "Linh cc";
     private FragmentListener listener;
     ArrayAdapter<String> adapter;
     ListView list_word;
-    private ArrayList<String> memSource = new ArrayList<String>();
-
+    private ArrayList<String> memSource;
+    private DataBaseHelper dataBaseHelper;
 
     public DictionaryFragment() {
         // Required empty public constructor
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
     }
 
     @Override
@@ -44,8 +40,16 @@ public class DictionaryFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        dataBaseHelper = new DataBaseHelper(view.getContext());
+
         list_word = view.findViewById(R.id.list_word);
-        adapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1, memSource);
+        String type = Global.getState(getActivity(), "dic_type");
+        if (type.equals("ev")) {
+            memSource = dataBaseHelper.getWord(TB_EN_VN);
+        } else {
+            memSource = dataBaseHelper.getWord(TB_VN_EN);
+        }
+        adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, memSource);
         list_word.setAdapter(adapter);
         list_word.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -56,9 +60,9 @@ public class DictionaryFragment extends Fragment {
         });
     }
 
-    public void resetDataSource(ArrayList<String> source){
+    public void resetDataSource(ArrayList<String> source) {
         memSource = source;
-        adapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1, memSource);
+        adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, memSource);
         list_word.setAdapter(adapter);
     }
 
@@ -72,20 +76,18 @@ public class DictionaryFragment extends Fragment {
 //            }
 //        }
     }
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-
-    }
 
     public void setOnFragmentListener(FragmentListener listener) {
         this.listener = listener;
     }
 
+    public void resetDataSource(String type) {
+        memSource.clear();
+        if (type.equals("ev")) {
+            memSource.addAll(dataBaseHelper.getWord(TB_EN_VN));
+        } else {
+            memSource.addAll(dataBaseHelper.getWord(TB_VN_EN));
+        }
+        adapter.notifyDataSetChanged();
+    }
 }

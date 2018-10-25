@@ -23,8 +23,8 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     private String DATABASE_LOCATION = "";
     private String DATABASE_FULL_PATH = "";
 
-    private final String TB_VN_EN = "vietanh";
-    private final String TB_EN_VN = "anhviet";
+    public static final String TB_VN_EN = "vietanh";
+    public static final String TB_EN_VN = "anhviet";
     private final String TB_BOOKMARK = "bookmark";
 
     private final String COL_KEY = "tu";
@@ -87,6 +87,17 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
     public ArrayList<String> getWord(int dicType) {
         String tableName = getTableName(dicType);
+        String q = "SELECT * FROM " + tableName;
+        Cursor result = memDB.rawQuery(q, null);
+
+        ArrayList<String> source = new ArrayList<>();
+
+        while (result.moveToNext()) {
+            source.add(result.getString(result.getColumnIndex(COL_KEY)));
+        }
+        return source;
+    }
+    public ArrayList<String> getWord(String tableName) {
         String q = "SELECT * FROM " + tableName;
         Cursor result = memDB.rawQuery(q, null);
 

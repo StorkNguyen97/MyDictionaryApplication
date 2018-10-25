@@ -106,31 +106,22 @@ public class MainActivity extends AppCompatActivity
         getMenuInflater().inflate(R.menu.main, menu);
         menuSetting = menu.findItem(R.id.action_settings);
         String id = Global.getState(this, "dic_type");
-        if (id != null)
-            onOptionsItemSelected(menu.findItem(Integer.valueOf(id)));
-        else{
-            ArrayList<String> source = dataBaseHelper.getWord(R.id.action_en_vn);
-            dictionaryFragment.resetDataSource(source);
-        }
+        if (id.equals("ev")) menuSetting.setIcon(getResources().getDrawable(R.drawable.en_vn_2));
+        else menuSetting.setIcon(getResources().getDrawable(R.drawable.vn_en_1));
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        Global.saveState(this, "dic_type", String.valueOf(id));
-        ArrayList<String> source = dataBaseHelper.getWord(id);
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_en_vn) {
-            dictionaryFragment.resetDataSource(source);
+        if (item.getItemId() == R.id.action_en_vn) {
+            Global.saveState(this, "dic_type", "ev");
+            dictionaryFragment.resetDataSource("ev");
             menuSetting.setIcon(getResources().getDrawable(R.drawable.en_vn_2));
-        }
-        else if (id == R.id.action_vn_en){
-            dictionaryFragment.resetDataSource(source);
+        } else if (item.getItemId() == R.id.action_vn_en) {
+            Global.saveState(this, "dic_type", "ve");
+            dictionaryFragment.resetDataSource("ve");
             menuSetting.setIcon(getResources().getDrawable(R.drawable.vn_en_1));
         }
-
         return super.onOptionsItemSelected(item);
     }
 
@@ -148,7 +139,7 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
-    void goToFragment(Fragment fragment, boolean isTop){
+    void goToFragment(Fragment fragment, boolean isTop) {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
