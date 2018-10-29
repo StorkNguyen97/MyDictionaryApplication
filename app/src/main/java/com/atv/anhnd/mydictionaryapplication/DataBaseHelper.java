@@ -5,6 +5,7 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -97,8 +98,9 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         return source;
     }
 
-    public ArrayList<String> getWord(String tableName) {
-        String q = "SELECT * FROM " + tableName;
+    public ArrayList<String> getWord(String tableName, int offset) {
+        Log.d("offset", offset + "");
+        String q = "SELECT * FROM " + tableName + " LIMIT 50 OFFSET " + offset * 50;
         Cursor result = memDB.rawQuery(q, null);
 
         ArrayList<String> source = new ArrayList<>();
@@ -109,18 +111,18 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         return source;
     }
 
-    public Word getWord(String tu, int dicType) {
-        String tableName = getTableName(dicType);
-        String q = " SELECT * FROM " + tableName + " WHERE upper([tu]) = upper(?) ";
-        Cursor result = memDB.rawQuery(q, new String[]{tu});
-
-        Word word = new Word();
-        while (result.moveToNext()) {
-            word.tu = result.getString(result.getColumnIndex(COL_KEY));
-            word.nghia = result.getString(result.getColumnIndex(COL_VALUE));
-        }
-        return word;
-    }
+//    public Word getWord(String tu, int dicType) {
+//        String tableName = getTableName(dicType);
+//        String q = " SELECT * FROM " + tableName + " WHERE upper([tu]) = upper(?) ";
+//        Cursor result = memDB.rawQuery(q, new String[]{tu});
+//
+//        Word word = new Word();
+//        while (result.moveToNext()) {
+//            word.tu = result.getString(result.getColumnIndex(COL_KEY));
+//            word.nghia = result.getString(result.getColumnIndex(COL_VALUE));
+//        }
+//        return word;
+//    }
 
     public Word getWord(String tu, String tableName) {
         String q = " SELECT * FROM " + tableName + " WHERE upper([tu]) = upper(?) ";

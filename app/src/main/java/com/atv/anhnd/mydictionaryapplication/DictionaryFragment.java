@@ -43,11 +43,11 @@ public class DictionaryFragment extends Fragment {
         dataBaseHelper = new DataBaseHelper(view.getContext());
 
         list_word = view.findViewById(R.id.list_word);
-        String type = Global.getState(getActivity(), "dic_type");
+        final String type = Global.getState(getActivity(), "dic_type");
         if (type != null && type.equals("ev")) {
-            memSource = dataBaseHelper.getWord(TB_EN_VN);
+            memSource = dataBaseHelper.getWord(TB_EN_VN, 0);
         } else {
-            memSource = dataBaseHelper.getWord(TB_VN_EN);
+            memSource = dataBaseHelper.getWord(TB_VN_EN, 0);
         }
         adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, memSource);
         list_word.setAdapter(adapter);
@@ -56,6 +56,18 @@ public class DictionaryFragment extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if (listener != null)
                     listener.onItemClick(memSource.get(position));
+            }
+        });
+        list_word.setOnScrollListener(new EndlessScrollListener() {
+            @Override
+            public boolean onLoadMore(int page, int totalItemsCount) {
+                if (type != null && type.equals("ev")) {
+                    memSource.addAll(dataBaseHelper.getWord(TB_EN_VN, page));
+                } else {
+                    memSource.addAll(dataBaseHelper.getWord(TB_VN_EN, page));
+                }
+                adapter.notifyDataSetChanged();
+                return true;
             }
         });
     }
@@ -84,9 +96,9 @@ public class DictionaryFragment extends Fragment {
     public void resetDataSource(String type) {
         memSource.clear();
         if (type.equals("ev")) {
-            memSource.addAll(dataBaseHelper.getWord(TB_EN_VN));
+            memSource.addAll(dataBaseHelper.getWord(TB_EN_VN, 0));
         } else {
-            memSource.addAll(dataBaseHelper.getWord(TB_VN_EN));
+            memSource.addAll(dataBaseHelper.getWord(TB_VN_EN, 0));
         }
         adapter.notifyDataSetChanged();
     }
