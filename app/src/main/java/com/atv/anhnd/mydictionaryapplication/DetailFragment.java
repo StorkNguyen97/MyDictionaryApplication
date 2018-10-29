@@ -38,13 +38,21 @@ public class DetailFragment extends Fragment {
         tu = getArguments().getString("tu");
         nghia = getArguments().getString("nghia");
 
+        btn_mark = view.findViewById(R.id.btn_mark);
+
+        boolean isMask = dataBaseHelper.isWordMark(new Word(tu, nghia));
+        if (isMask) {
+            btn_mark.setImageResource(R.drawable.ic_bookmark_fill);
+            btn_mark.setTag(1);
+        } else {
+            btn_mark.setImageResource(R.drawable.ic_bookmark_border);
+            btn_mark.setTag(0);
+        }
+
         word_detail = view.findViewById(R.id.work_detail);
         word_detail.setText(tu);
         word_meaning = view.findViewById(R.id.word_meaning);
         word_meaning.setText(nghia);
-        btn_mark = view.findViewById(R.id.btn_mark);
-
-        btn_mark.setTag(0);
 
         btn_mark.setOnClickListener(new View.OnClickListener() {
             @Override
