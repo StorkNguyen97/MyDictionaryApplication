@@ -111,6 +111,19 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         return source;
     }
 
+    public ArrayList<String> search(String tableName, String word) {
+        String q = "SELECT * FROM " + tableName + " WHERE tu LIKE '%" + word + "%' LIMIT 100";
+        Log.d("query",q);
+        Cursor result = memDB.rawQuery(q, null);
+
+        ArrayList<String> source = new ArrayList<>();
+
+        while (result.moveToNext()) {
+            source.add(result.getString(result.getColumnIndex(COL_KEY)));
+        }
+        return source;
+    }
+
 //    public Word getWord(String tu, int dicType) {
 //        String tableName = getTableName(dicType);
 //        String q = " SELECT * FROM " + tableName + " WHERE upper([tu]) = upper(?) ";

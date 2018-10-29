@@ -24,6 +24,8 @@ public class DictionaryFragment extends Fragment {
     ListView list_word;
     private ArrayList<String> memSource;
     private DataBaseHelper dataBaseHelper;
+    private String table = TB_EN_VN;
+    private boolean isSearch = false;
 
     public DictionaryFragment() {
         // Required empty public constructor
@@ -45,8 +47,10 @@ public class DictionaryFragment extends Fragment {
         list_word = view.findViewById(R.id.list_word);
         final String type = Global.getState(getActivity(), "dic_type");
         if (type != null && type.equals("ev")) {
+            table = TB_EN_VN;
             memSource = dataBaseHelper.getWord(TB_EN_VN, 0);
         } else {
+            table = TB_EN_VN;
             memSource = dataBaseHelper.getWord(TB_VN_EN, 0);
         }
         adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, memSource);
@@ -61,6 +65,7 @@ public class DictionaryFragment extends Fragment {
         list_word.setOnScrollListener(new EndlessScrollListener() {
             @Override
             public boolean onLoadMore(int page, int totalItemsCount) {
+                if (isSearch) return true;
                 if (type != null && type.equals("ev")) {
                     memSource.addAll(dataBaseHelper.getWord(TB_EN_VN, page));
                 } else {
@@ -79,7 +84,12 @@ public class DictionaryFragment extends Fragment {
     }
 
     public void filterValue(String value) {
-        adapter.getFilter().filter(value);
+        if (value.trim().length() > 0) isSearch = true;
+        else {
+            isSearch = false;
+            return;
+        }
+//        adapter.getFilter().filter(value);
 //        int size = adapter.getCount();
 //        for (int i = 0; i < size; i++) {
 //            if (adapter.getItem(i).startsWith(value)) {
@@ -87,6 +97,9 @@ public class DictionaryFragment extends Fragment {
 //                break;
 //            }
 //        }
+        memSource.clear();
+        memSource.addAll(dataBaseHelper.search(table, value));
+        adapter.notifyDataSetChanged();
     }
 
     public void setOnFragmentListener(FragmentListener listener) {

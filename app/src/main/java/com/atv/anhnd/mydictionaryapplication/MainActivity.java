@@ -31,6 +31,7 @@ public class MainActivity extends AppCompatActivity
 
     DictionaryFragment dictionaryFragment;
     BookmarkFragment bookmarkFragment;
+    EditText edit_search;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,7 +74,7 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
-        EditText edit_search = findViewById(R.id.edit_search);
+        edit_search = findViewById(R.id.edit_search);
         edit_search.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -131,11 +132,13 @@ public class MainActivity extends AppCompatActivity
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.action_en_vn) {
+            edit_search.setText("");
             Global.saveState(this, "dic_type", "ev");
             dictionaryFragment.resetDataSource("ev");
             menuSetting.setIcon(getResources().getDrawable(R.drawable.en_vn_2));
             goToFragment(dictionaryFragment, false);
         } else if (item.getItemId() == R.id.action_vn_en) {
+            edit_search.setText("");
             Global.saveState(this, "dic_type", "ve");
             dictionaryFragment.resetDataSource("ve");
             menuSetting.setIcon(getResources().getDrawable(R.drawable.vn_en_1));
