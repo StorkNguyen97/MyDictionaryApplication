@@ -183,12 +183,4 @@ public class MainActivity extends AppCompatActivity
         fragmentTransaction.commit();
     }
 
-
-//    @Override
-//    public boolean onPrepareOptionsMenu(Menu menu) {
-//        String activeFragment = getSupportFragmentManager().findFragmentById(R.id.fragment_container).getClass().getSimpleName();
-//        if (!activeFragment.equals(BookmarkFragment.class.getSimpleName())){
-//
-//        }
-//    }
 }

@@ -60,7 +60,7 @@ public class BookmarkAdapter extends BaseAdapter {
             @Override
             public void onClick(View v) {
                 if (listener != null)
-                listener.onClickItem(position);
+                    listener.onClickItem(position);
             }
         });
 
@@ -74,7 +74,7 @@ public class BookmarkAdapter extends BaseAdapter {
         return view;
     }
 
-    public void removeItem(int position){
+    public void removeItem(int position) {
         memSource.remove(position);
     }
 
@@ -83,11 +83,11 @@ public class BookmarkAdapter extends BaseAdapter {
         ImageView btnDel;
     }
 
-    public void setOnClickListener(ListItemListener listener){
+    public void setOnClickListener(ListItemListener listener) {
         this.listener = listener;
     }
 
-    public void setOnClickDelListener(ListItemListener listenerBtnDel){
+    public void setOnClickDelListener(ListItemListener listenerBtnDel) {
         this.listenerBtnDel = listenerBtnDel;
     }
 }

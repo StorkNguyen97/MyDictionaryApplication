@@ -36,14 +36,6 @@ public class BookmarkFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-//        Button myButton = view.findViewById(R.id.btn_click);
-//        myButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                if (listener != null)
-//                    listener.onItemClick(value);
-//            }
-//        });
 
         dataBaseHelper = new DataBaseHelper(view.getContext());
 
@@ -84,19 +76,4 @@ public class BookmarkFragment extends Fragment {
         this.listener = listener;
     }
 
-
-    String[] getListOfWords() {
-        String[] sourse = new String[]{
-                "Linh",
-                "Xinh",
-                "Dep",
-                "Nhat",
-                "Tren",
-                "Doi",
-                "That",
-                "Su",
-                "Luon"
-        };
-        return sourse;
-    }
 }

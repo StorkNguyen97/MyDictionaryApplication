@@ -113,7 +113,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
     public ArrayList<String> search(String tableName, String word) {
         String q = "SELECT * FROM " + tableName + " WHERE tu LIKE '%" + word + "%' LIMIT 100";
-        Log.d("query",q);
+        Log.d("query", q);
         Cursor result = memDB.rawQuery(q, null);
 
         ArrayList<String> source = new ArrayList<>();
@@ -123,19 +123,6 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         }
         return source;
     }
-
-//    public Word getWord(String tu, int dicType) {
-//        String tableName = getTableName(dicType);
-//        String q = " SELECT * FROM " + tableName + " WHERE upper([tu]) = upper(?) ";
-//        Cursor result = memDB.rawQuery(q, new String[]{tu});
-//
-//        Word word = new Word();
-//        while (result.moveToNext()) {
-//            word.tu = result.getString(result.getColumnIndex(COL_KEY));
-//            word.nghia = result.getString(result.getColumnIndex(COL_VALUE));
-//        }
-//        return word;
-//    }
 
     public Word getWord(String tu, String tableName) {
         String q = " SELECT * FROM " + tableName + " WHERE upper([tu]) = upper(?) ";

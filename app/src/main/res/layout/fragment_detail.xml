@@ -42,8 +42,7 @@
             android:id="@+id/word_meaning"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:paddingLeft="20sp"
-            android:paddingRight="20sp"
+            android:padding="20sp"
             android:textSize="20sp"
             app:fontFamily="@font/roboto_medium" />
     </ScrollView>
