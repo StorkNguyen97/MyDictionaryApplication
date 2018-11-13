@@ -87,14 +87,6 @@ public class DictionaryFragment extends Fragment {
             isSearch = false;
             return;
         }
-//        adapter.getFilter().filter(value);
-//        int size = adapter.getCount();
-//        for (int i = 0; i < size; i++) {
-//            if (adapter.getItem(i).startsWith(value)) {
-//                list_word.setSelection(i);
-//                break;
-//            }
-//        }
         memSource.clear();
         memSource.addAll(dataBaseHelper.search(table, value));
         adapter.notifyDataSetChanged();
