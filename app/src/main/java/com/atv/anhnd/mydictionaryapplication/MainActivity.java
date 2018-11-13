@@ -1,5 +1,6 @@
 package com.atv.anhnd.mydictionaryapplication;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -14,12 +15,15 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
 import java.util.ArrayList;
 
 import static com.atv.anhnd.mydictionaryapplication.DataBaseHelper.TB_EN_VN;
 import static com.atv.anhnd.mydictionaryapplication.DataBaseHelper.TB_VN_EN;
+import static com.atv.anhnd.mydictionaryapplication.HideKeyboard.hideKeyboard;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -83,7 +87,13 @@ public class MainActivity extends AppCompatActivity
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                dictionaryFragment.filterValue(s.toString());
+                final String type = Global.getState(MainActivity.this, "dic_type");
+                if (type != null && type.equals("ev")) {
+                    dictionaryFragment.filterValue(s.toString(), TB_EN_VN);
+                } else {
+                    dictionaryFragment.filterValue(s.toString(), TB_VN_EN);
+
+                }
             }
 
             @Override
@@ -144,12 +154,14 @@ public class MainActivity extends AppCompatActivity
             menuSetting.setIcon(getResources().getDrawable(R.drawable.vn_en_1));
             goToFragment(dictionaryFragment, false);
         }
+        hideKeyboard(MainActivity.this);
         return super.onOptionsItemSelected(item);
     }
 
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
+        HideKeyboard.hideKeyboard(this);
         int id = item.getItemId();
 
         if (id == R.id.nav_bookmark) {
@@ -170,6 +182,7 @@ public class MainActivity extends AppCompatActivity
             fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
     }
+
 
 //    @Override
 //    public boolean onPrepareOptionsMenu(Menu menu) {
