@@ -18,7 +18,6 @@ import static com.atv.anhnd.mydictionaryapplication.DataBaseHelper.TB_VN_EN;
 
 public class DictionaryFragment extends Fragment {
 
-    private String value = "Linh cc";
     private FragmentListener listener;
     ArrayAdapter<String> adapter;
     ListView list_word;
@@ -75,12 +74,7 @@ public class DictionaryFragment extends Fragment {
         });
     }
 
-    public void resetDataSource(ArrayList<String> source) {
-        memSource = source;
-        adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, memSource);
-        list_word.setAdapter(adapter);
-    }
-
+    //Search word By value
     public void filterValue(String value, String table) {
         if (value.trim().length() > 0) isSearch = true;
         else {
@@ -96,6 +90,7 @@ public class DictionaryFragment extends Fragment {
         this.listener = listener;
     }
 
+    //Reset Data Source
     public void resetDataSource(String type) {
         memSource.clear();
         if (type.equals("ev")) {

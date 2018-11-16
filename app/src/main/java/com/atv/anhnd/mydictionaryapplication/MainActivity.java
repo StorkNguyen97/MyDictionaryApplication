@@ -173,6 +173,7 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
+    //Go to Fragment
     void goToFragment(Fragment fragment, boolean isTop) {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();

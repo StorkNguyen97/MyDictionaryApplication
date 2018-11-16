@@ -85,19 +85,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
     }
 
-    public ArrayList<String> getWord(int dicType) {
-        String tableName = getTableName(dicType);
-        String q = "SELECT * FROM " + tableName;
-        Cursor result = memDB.rawQuery(q, null);
-
-        ArrayList<String> source = new ArrayList<>();
-
-        while (result.moveToNext()) {
-            source.add(result.getString(result.getColumnIndex(COL_KEY)));
-        }
-        return source;
-    }
-
+    //Get only 50 words in Database to show in Dictionary Fragment
     public ArrayList<String> getWord(String tableName, int offset) {
         Log.d("offset", offset + "");
         String q = "SELECT * FROM " + tableName + " LIMIT 50 OFFSET " + offset * 50;
@@ -111,6 +99,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         return source;
     }
 
+    //Search word in Database
     public ArrayList<String> search(String tableName, String word) {
         String q = "SELECT * FROM " + tableName + " WHERE tu LIKE '%" + word + "%' LIMIT 100";
         Log.d("query", q);
@@ -124,6 +113,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         return source;
     }
 
+    //Get word to see the word meaning
     public Word getWord(String tu, String tableName) {
         String q = " SELECT * FROM " + tableName + " WHERE upper([tu]) = upper(?) ";
         Cursor result = memDB.rawQuery(q, new String[]{tu});
@@ -136,6 +126,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         return word;
     }
 
+    //Add word to Bookmark
     public void addBookmark(Word word) {
         try {
             String q = " INSERT INTO bookmark([" + COL_KEY + "],[" + COL_VALUE + "]) VALUES (?, ?);";
@@ -145,6 +136,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         }
     }
 
+    //Remove word from Bookmark
     public void removeBookmark(Word word) {
         try {
             String q = " DELETE FROM bookmark WHERE upper([" + COL_KEY + "]) = upper(?) AND [" + COL_VALUE + "] = ?;";
@@ -154,6 +146,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         }
     }
 
+    //Get all word from Bookmark
     public ArrayList<String> getAllWordFromBookmark() {
         String q = " SELECT * FROM bookmark ORDER BY [created_at] DESC;";
         Cursor result = memDB.rawQuery(q, null);
@@ -166,12 +159,14 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         return source;
     }
 
+    //Check word is mark or not
     public boolean isWordMark(Word word) {
         String q = " SELECT * FROM bookmark WHERE upper([tu]) = upper(?) AND [nghia] = ?";
         Cursor result = memDB.rawQuery(q, new String[]{word.tu, word.nghia});
         return result.getCount() > 0;
     }
 
+    //Get list words from Bookmark
     public Word getWordFromBookmark(String tu) {
         String q = " SELECT * FROM bookmark WHERE tu = ?";
         Cursor result = memDB.rawQuery(q, new String[]{tu});

@@ -8,6 +8,7 @@ public class Word {
 
     }
 
+    //Word constructor
     public Word(String key, String value) {
         this.tu = key;
         this.nghia = value;
