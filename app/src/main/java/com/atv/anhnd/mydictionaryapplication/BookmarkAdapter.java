@@ -29,6 +29,7 @@ public class BookmarkAdapter extends BaseAdapter {
         return memSource.size();
     }
 
+    //Get item when click
     @Override
     public Object getItem(int position) {
         return memSource.get(position);
@@ -39,6 +40,8 @@ public class BookmarkAdapter extends BaseAdapter {
         return 0;
     }
 
+
+    //Init View Bookmark Fragment
     @Override
     public View getView(final int position, View view, ViewGroup viewGroup) {
 
@@ -56,6 +59,8 @@ public class BookmarkAdapter extends BaseAdapter {
         }
 
         viewHolder.txtView.setText(memSource.get(position));
+
+        //Set Event
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -74,6 +79,7 @@ public class BookmarkAdapter extends BaseAdapter {
         return view;
     }
 
+    //Remove item Function
     public void removeItem(int position) {
         memSource.remove(position);
     }

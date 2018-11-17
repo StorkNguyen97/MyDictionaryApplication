@@ -27,6 +27,13 @@
             app:fontFamily="@font/roboto_bold" />
 
         <ImageButton
+            android:id="@+id/btn_spelling"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="?actionBarItemBackground"
+            android:src="@drawable/ic_volume"/>
+
+        <ImageButton
             android:id="@+id/btn_mark"
             android:layout_width="48dp"
             android:layout_height="48dp"

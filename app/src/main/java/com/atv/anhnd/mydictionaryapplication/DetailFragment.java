@@ -30,6 +30,7 @@ public class DetailFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_detail, container, false);
     }
 
+    //Init Detail Fragment Screen
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
