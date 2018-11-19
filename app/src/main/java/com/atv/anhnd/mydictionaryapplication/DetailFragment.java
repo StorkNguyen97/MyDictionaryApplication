@@ -1,6 +1,8 @@
 package com.atv.anhnd.mydictionaryapplication;
 
+import android.os.Build;
 import android.os.Bundle;
+import android.speech.tts.TextToSpeech;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -10,14 +12,17 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import java.util.Locale;
+
 public class DetailFragment extends Fragment {
 
-    private String value = "";
     private TextView word_detail, word_meaning;
-    private ImageButton btn_mark;
+    private ImageButton btn_mark, btn_spelling;
     private DataBaseHelper dataBaseHelper;
     private String tu;
     private String nghia;
+    private TextToSpeech textToSpeech;
+
 
     public DetailFragment() {
         // Required empty public constructor
@@ -35,11 +40,14 @@ public class DetailFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        final String type = Global.getState(getActivity(), "dic_type");
+
         dataBaseHelper = new DataBaseHelper(view.getContext());
         tu = getArguments().getString("tu");
         nghia = getArguments().getString("nghia");
 
         btn_mark = view.findViewById(R.id.btn_mark);
+        btn_spelling = view.findViewById(R.id.btn_spelling);
 
         boolean isMask = dataBaseHelper.isWordMark(new Word(tu, nghia));
         if (isMask) {
@@ -54,6 +62,10 @@ public class DetailFragment extends Fragment {
         word_detail.setText(tu);
         word_meaning = view.findViewById(R.id.word_meaning);
         word_meaning.setText(nghia);
+
+        ((MainActivity) getActivity()).hideSearchBar();
+        getActivity().setTitle("Word Meaning");
+
 
         btn_mark.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,5 +82,32 @@ public class DetailFragment extends Fragment {
                 }
             }
         });
+
+        btn_spelling.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                speakOut();
+            }
+        });
+
+        textToSpeech = new TextToSpeech(getContext(), new TextToSpeech.OnInitListener() {
+            @Override
+            public void onInit(int status) {
+                if (status != TextToSpeech.ERROR) {
+                    if (type.equals("ev")) {
+                        textToSpeech.setLanguage(Locale.UK);
+                    } else textToSpeech.setLanguage(Locale.forLanguageTag("vi-VN"));
+                }
+            }
+        });
     }
+
+
+    private void speakOut() {
+        // Text need speech
+        String toSpeak = word_detail.getText().toString();
+        textToSpeech.speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null, null);
+    }
+
+
 }

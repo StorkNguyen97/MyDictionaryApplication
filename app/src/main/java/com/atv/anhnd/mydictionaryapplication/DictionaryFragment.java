@@ -44,11 +44,13 @@ public class DictionaryFragment extends Fragment {
 
         list_word = view.findViewById(R.id.list_word);
         final String type = Global.getState(getActivity(), "dic_type");
+
         if (type != null && type.equals("ev")) {
             memSource = dataBaseHelper.getWord(TB_EN_VN, 0);
         } else {
             memSource = dataBaseHelper.getWord(TB_VN_EN, 0);
         }
+
         adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, memSource);
         list_word.setAdapter(adapter);
         list_word.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -59,6 +61,7 @@ public class DictionaryFragment extends Fragment {
                     listener.onItemClick(memSource.get(position));
             }
         });
+
         list_word.setOnScrollListener(new EndlessScrollListener() {
             @Override
             public boolean onLoadMore(int page, int totalItemsCount) {
@@ -72,6 +75,8 @@ public class DictionaryFragment extends Fragment {
                 return true;
             }
         });
+
+        ((MainActivity) getActivity()).showSearchBar();
     }
 
     //Search word By value

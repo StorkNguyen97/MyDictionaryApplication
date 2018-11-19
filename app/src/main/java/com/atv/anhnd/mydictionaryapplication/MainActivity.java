@@ -184,4 +184,12 @@ public class MainActivity extends AppCompatActivity
         fragmentTransaction.commit();
     }
 
+    public void hideSearchBar(){
+        edit_search.setVisibility(View.GONE);
+
+    }
+    public void showSearchBar(){
+        edit_search.setVisibility(View.VISIBLE);
+    }
+
 }

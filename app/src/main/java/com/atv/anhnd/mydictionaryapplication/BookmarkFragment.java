@@ -63,6 +63,10 @@ public class BookmarkFragment extends Fragment {
                 adapter.notifyDataSetChanged();
             }
         });
+
+        ((MainActivity) getActivity()).hideSearchBar();
+        getActivity().setTitle("Bookmark");
+
     }
 
     @Override
