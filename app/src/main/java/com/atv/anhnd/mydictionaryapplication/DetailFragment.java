@@ -1,6 +1,5 @@
 package com.atv.anhnd.mydictionaryapplication;
 
-import android.os.Build;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
 import android.support.annotation.NonNull;
@@ -83,6 +82,7 @@ public class DetailFragment extends Fragment {
             }
         });
 
+        //Click to hear the spelling
         btn_spelling.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

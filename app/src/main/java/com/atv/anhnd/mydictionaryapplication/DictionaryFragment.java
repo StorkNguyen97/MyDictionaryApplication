@@ -10,9 +10,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-
 import java.util.ArrayList;
-
 import static com.atv.anhnd.mydictionaryapplication.DataBaseHelper.TB_EN_VN;
 import static com.atv.anhnd.mydictionaryapplication.DataBaseHelper.TB_VN_EN;
 

@@ -1,6 +1,5 @@
 package com.atv.anhnd.mydictionaryapplication;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -16,11 +15,7 @@ import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
-
-import java.util.ArrayList;
-
 import static com.atv.anhnd.mydictionaryapplication.DataBaseHelper.TB_EN_VN;
 import static com.atv.anhnd.mydictionaryapplication.DataBaseHelper.TB_VN_EN;
 import static com.atv.anhnd.mydictionaryapplication.HideKeyboard.hideKeyboard;
@@ -78,7 +73,6 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
-        edit_search = findViewById(R.id.edit_search);
         edit_search.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -106,6 +100,8 @@ public class MainActivity extends AppCompatActivity
     private void findViewById() {
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        edit_search = findViewById(R.id.edit_search);
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
