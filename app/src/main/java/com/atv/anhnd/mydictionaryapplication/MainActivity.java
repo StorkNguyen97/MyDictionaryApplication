@@ -41,6 +41,7 @@ public class MainActivity extends AppCompatActivity
 
         findViewById();
 
+        //Init Fragment
         dictionaryFragment = new DictionaryFragment();
         bookmarkFragment = new BookmarkFragment();
 
@@ -86,7 +87,6 @@ public class MainActivity extends AppCompatActivity
                     dictionaryFragment.filterValue(s.toString(), TB_EN_VN);
                 } else {
                     dictionaryFragment.filterValue(s.toString(), TB_VN_EN);
-
                 }
             }
 
@@ -101,7 +101,7 @@ public class MainActivity extends AppCompatActivity
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        edit_search = findViewById(R.id.edit_search);
+         edit_search = findViewById(R.id.edit_search);
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(

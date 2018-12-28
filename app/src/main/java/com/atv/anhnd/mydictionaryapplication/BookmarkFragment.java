@@ -37,7 +37,6 @@ public class BookmarkFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        //Init Database Helper
         dataBaseHelper = new DataBaseHelper(view.getContext());
 
         ListView bookmarkList = view.findViewById(R.id.bookmark_list);
@@ -46,7 +45,6 @@ public class BookmarkFragment extends Fragment {
         final BookmarkAdapter adapter = new BookmarkAdapter(getActivity(), dataBaseHelper.getAllWordFromBookmark());
         bookmarkList.setAdapter(adapter);
 
-        //Event Click to word meaning
         adapter.setOnClickListener(new ListItemListener() {
             @Override
             public void onClickItem(int position) {
@@ -55,7 +53,6 @@ public class BookmarkFragment extends Fragment {
             }
         });
 
-        //Event Click to Remove word from Bookmark
         adapter.setOnClickDelListener(new ListItemListener() {
             @Override
             public void onClickItem(int position) {

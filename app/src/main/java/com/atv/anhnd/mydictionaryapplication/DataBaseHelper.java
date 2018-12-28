@@ -6,6 +6,7 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -86,7 +87,6 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
     //Get only 50 words in Database to show in Dictionary Fragment
     public ArrayList<String> getWord(String tableName, int offset) {
-        Log.d("offset", offset + "");
         String q = "SELECT * FROM " + tableName + " LIMIT 50 OFFSET " + offset * 50;
         Cursor result = memDB.rawQuery(q, null);
 
@@ -100,7 +100,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
     //Search word in Database
     public ArrayList<String> search(String tableName, String word) {
-        String q = "SELECT * FROM " + tableName + " WHERE tu LIKE '%" + word + "%' LIMIT 100";
+        String q = "SELECT * FROM " + tableName + " WHERE tu LIKE '" + word.trim() + "%' LIMIT 100";
         Log.d("query", q);
         Cursor result = memDB.rawQuery(q, null);
 

@@ -18,6 +18,7 @@
         <TextView
             android:id="@+id/work_detail"
             android:layout_width="0dp"
+            android:text="Word"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center_vertical"
@@ -39,6 +40,7 @@
             android:layout_height="48dp"
             android:background="?actionBarItemBackground"
             android:src="@drawable/ic_bookmark_border"/>
+
         </LinearLayout>
 
     <ScrollView
@@ -50,6 +52,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="20sp"
+            android:text="Word meaning"
             android:textSize="20sp"
             app:fontFamily="@font/roboto_medium" />
     </ScrollView>

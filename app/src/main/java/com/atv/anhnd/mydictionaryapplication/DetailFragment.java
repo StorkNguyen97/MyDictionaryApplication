@@ -48,8 +48,8 @@ public class DetailFragment extends Fragment {
         btn_mark = view.findViewById(R.id.btn_mark);
         btn_spelling = view.findViewById(R.id.btn_spelling);
 
-        boolean isMask = dataBaseHelper.isWordMark(new Word(tu, nghia));
-        if (isMask) {
+        boolean isMark = dataBaseHelper.isWordMark(new Word(tu, nghia));
+        if (isMark) {
             btn_mark.setImageResource(R.drawable.ic_bookmark_fill);
             btn_mark.setTag(1);
         } else {
