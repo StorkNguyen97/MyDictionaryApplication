@@ -1,4 +1,4 @@
-package com.atv.anhnd.mydictionaryapplication;
+package com.atv.anhnd.mydictionaryapplication.fragment;
 
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
@@ -10,6 +10,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
+
+import com.atv.anhnd.mydictionaryapplication.db_helper.DataBaseHelper;
+import com.atv.anhnd.mydictionaryapplication.share.Global;
+import com.atv.anhnd.mydictionaryapplication.MainActivity;
+import com.atv.anhnd.mydictionaryapplication.R;
+import com.atv.anhnd.mydictionaryapplication.model.Word;
 
 import java.util.Locale;
 

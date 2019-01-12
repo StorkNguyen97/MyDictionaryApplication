@@ -16,9 +16,18 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
-import static com.atv.anhnd.mydictionaryapplication.DataBaseHelper.TB_EN_VN;
-import static com.atv.anhnd.mydictionaryapplication.DataBaseHelper.TB_VN_EN;
-import static com.atv.anhnd.mydictionaryapplication.HideKeyboard.hideKeyboard;
+
+import com.atv.anhnd.mydictionaryapplication.db_helper.DataBaseHelper;
+import com.atv.anhnd.mydictionaryapplication.fragment.BookmarkFragment;
+import com.atv.anhnd.mydictionaryapplication.fragment.DetailFragment;
+import com.atv.anhnd.mydictionaryapplication.fragment.DictionaryFragment;
+import com.atv.anhnd.mydictionaryapplication.helper.HideKeyboard;
+import com.atv.anhnd.mydictionaryapplication.share.FragmentListener;
+import com.atv.anhnd.mydictionaryapplication.share.Global;
+
+import static com.atv.anhnd.mydictionaryapplication.db_helper.DataBaseHelper.TB_EN_VN;
+import static com.atv.anhnd.mydictionaryapplication.db_helper.DataBaseHelper.TB_VN_EN;
+import static com.atv.anhnd.mydictionaryapplication.helper.HideKeyboard.hideKeyboard;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -101,7 +110,7 @@ public class MainActivity extends AppCompatActivity
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-         edit_search = findViewById(R.id.edit_search);
+        edit_search = findViewById(R.id.edit_search);
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -180,11 +189,12 @@ public class MainActivity extends AppCompatActivity
         fragmentTransaction.commit();
     }
 
-    public void hideSearchBar(){
+    public void hideSearchBar() {
         edit_search.setVisibility(View.GONE);
 
     }
-    public void showSearchBar(){
+
+    public void showSearchBar() {
         edit_search.setVisibility(View.VISIBLE);
     }
 

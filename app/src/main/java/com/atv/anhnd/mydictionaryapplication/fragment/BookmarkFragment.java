@@ -1,4 +1,4 @@
-package com.atv.anhnd.mydictionaryapplication;
+package com.atv.anhnd.mydictionaryapplication.fragment;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -9,6 +9,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+
+import com.atv.anhnd.mydictionaryapplication.adapter.BookmarkAdapter;
+import com.atv.anhnd.mydictionaryapplication.db_helper.DataBaseHelper;
+import com.atv.anhnd.mydictionaryapplication.share.FragmentListener;
+import com.atv.anhnd.mydictionaryapplication.share.ListItemListener;
+import com.atv.anhnd.mydictionaryapplication.MainActivity;
+import com.atv.anhnd.mydictionaryapplication.R;
 
 public class BookmarkFragment extends Fragment {
 

@@ -1,4 +1,4 @@
-package com.atv.anhnd.mydictionaryapplication;
+package com.atv.anhnd.mydictionaryapplication.share;
 
 import android.app.Activity;
 import android.content.Context;

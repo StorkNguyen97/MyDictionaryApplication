@@ -1,4 +1,4 @@
-package com.atv.anhnd.mydictionaryapplication;
+package com.atv.anhnd.mydictionaryapplication.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -7,6 +7,10 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.atv.anhnd.mydictionaryapplication.R;
+import com.atv.anhnd.mydictionaryapplication.share.ListItemListener;
+
 import java.util.ArrayList;
 
 public class BookmarkAdapter extends BaseAdapter {

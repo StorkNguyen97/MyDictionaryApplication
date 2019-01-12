@@ -1,11 +1,12 @@
-package com.atv.anhnd.mydictionaryapplication;
+package com.atv.anhnd.mydictionaryapplication.db_helper;
 
 import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
+
+import com.atv.anhnd.mydictionaryapplication.model.Word;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -98,10 +99,9 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         return source;
     }
 
-    //Search word in Database
+    //Search word in Database limited 100 words
     public ArrayList<String> search(String tableName, String word) {
         String q = "SELECT * FROM " + tableName + " WHERE tu LIKE '" + word.trim() + "%' LIMIT 100";
-        Log.d("query", q);
         Cursor result = memDB.rawQuery(q, null);
 
         ArrayList<String> source = new ArrayList<>();
@@ -175,15 +175,5 @@ public class DataBaseHelper extends SQLiteOpenHelper {
             word.nghia = result.getString(result.getColumnIndex(COL_VALUE));
         }
         return word;
-    }
-
-    public String getTableName(int dicType) {
-        String tableName = "";
-        if (dicType == R.id.action_en_vn) {
-            tableName = TB_EN_VN;
-        } else {
-            tableName = TB_VN_EN;
-        }
-        return tableName;
     }
 }

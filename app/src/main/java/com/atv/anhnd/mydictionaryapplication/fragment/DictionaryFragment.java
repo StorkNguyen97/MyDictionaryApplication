@@ -1,4 +1,4 @@
-package com.atv.anhnd.mydictionaryapplication;
+package com.atv.anhnd.mydictionaryapplication.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -10,9 +10,18 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+
+import com.atv.anhnd.mydictionaryapplication.db_helper.DataBaseHelper;
+import com.atv.anhnd.mydictionaryapplication.helper.EndlessScrollListener;
+import com.atv.anhnd.mydictionaryapplication.share.FragmentListener;
+import com.atv.anhnd.mydictionaryapplication.share.Global;
+import com.atv.anhnd.mydictionaryapplication.helper.HideKeyboard;
+import com.atv.anhnd.mydictionaryapplication.MainActivity;
+import com.atv.anhnd.mydictionaryapplication.R;
+
 import java.util.ArrayList;
-import static com.atv.anhnd.mydictionaryapplication.DataBaseHelper.TB_EN_VN;
-import static com.atv.anhnd.mydictionaryapplication.DataBaseHelper.TB_VN_EN;
+import static com.atv.anhnd.mydictionaryapplication.db_helper.DataBaseHelper.TB_EN_VN;
+import static com.atv.anhnd.mydictionaryapplication.db_helper.DataBaseHelper.TB_VN_EN;
 
 public class DictionaryFragment extends Fragment {
 
