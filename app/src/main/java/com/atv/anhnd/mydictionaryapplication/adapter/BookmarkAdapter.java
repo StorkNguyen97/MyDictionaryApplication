@@ -31,7 +31,7 @@ public class BookmarkAdapter extends BaseAdapter {
         return memSource.size();
     }
 
-    //Get item when click
+    //Get item by position
     @Override
     public Object getItem(int position) {
         return memSource.get(position);
@@ -52,6 +52,7 @@ public class BookmarkAdapter extends BaseAdapter {
         if (view == null) {
             viewHolder = new ViewHolder();
             view = LayoutInflater.from(memContext).inflate(R.layout.bookmark_item, viewGroup, false);
+
             viewHolder.txtView = view.findViewById(R.id.txtWord);
             viewHolder.btnDel = view.findViewById(R.id.btn_del);
 
@@ -81,7 +82,7 @@ public class BookmarkAdapter extends BaseAdapter {
         return view;
     }
 
-    //Remove item Function
+    //Remove item by position
     public void removeItem(int position) {
         memSource.remove(position);
     }
